@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-com/example/datalayer/utils/EnvironmentVariables.kt
+/DataLayer/src/main/java/com/example/datalayer/utils/EnvironmentVariables.kt
