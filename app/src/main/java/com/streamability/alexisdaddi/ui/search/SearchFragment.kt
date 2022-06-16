@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.streamability.alexisdaddi.R
+import com.streamability.alexisdaddi.databinding.SearchFragmentBinding
+import com.streamability.alexisdaddi.ui.search.SearchViewModel
 
 class SearchFragment : Fragment() {
+    private var _binding: SearchFragmentBinding? = null
+    private val binding: SearchFragmentBinding get() = _binding!!
 
-    companion object {
-        fun newInstance() = SearchFragment()
-    }
-
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
-    }
+    ) = SearchFragmentBinding.inflate(inflater, container, false).also {
+        _binding = it
+    }.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
-
 }

@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.streamability.alexisdaddi.R
+import com.streamability.alexisdaddi.databinding.ResultsFragmentBinding
+import com.streamability.alexisdaddi.ui.results.ResultsViewModel
 
 class ResultsFragment : Fragment() {
+    private var _binding: ResultsFragmentBinding? = null
+    private val binding: ResultsFragmentBinding get() = _binding!!
 
-    companion object {
-        fun newInstance() = ResultsFragment()
-    }
-
-    private lateinit var viewModel: ResultsViewModel
+    private val viewModel by viewModels<ResultsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.results_fragment, container, false)
-    }
+    ) = ResultsFragmentBinding.inflate(inflater, container, false).also {
+        _binding = it
+    }.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ResultsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
-
 }
