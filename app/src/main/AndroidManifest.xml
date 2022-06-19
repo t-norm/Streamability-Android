@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AlexIsDaddi">
+        android:theme="@style/Theme.AlexIsDaddi"
+        android:name=".BaseApplication">
         <activity
             android:name="com.streamability.alexisdaddi.MainActivity"
             android:exported="true">
@@ -18,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name = "API_KEY"
-            android:value = "${API_KEY_V3}"/>
+<!--        <meta-data-->
+<!--            android:name = "API_KEY"-->
+<!--            android:value = "${API_KEY_V3}"/>-->
     </application>
 
 </manifest>

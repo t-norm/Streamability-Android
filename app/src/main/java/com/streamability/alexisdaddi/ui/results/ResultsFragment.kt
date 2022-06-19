@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import com.streamability.alexisdaddi.R
 import com.streamability.alexisdaddi.databinding.ResultsFragmentBinding
 import com.streamability.alexisdaddi.ui.results.ResultsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultsFragment : Fragment() {
     private var _binding: ResultsFragmentBinding? = null
     private val binding: ResultsFragmentBinding get() = _binding!!

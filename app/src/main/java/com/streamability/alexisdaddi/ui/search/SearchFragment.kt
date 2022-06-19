@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import com.streamability.alexisdaddi.R
 import com.streamability.alexisdaddi.databinding.SearchFragmentBinding
 import com.streamability.alexisdaddi.ui.search.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: SearchFragmentBinding? = null
     private val binding: SearchFragmentBinding get() = _binding!!

@@ -13,7 +13,9 @@ import com.streamability.alexisdaddi.databinding.ActivityMainBinding.inflate
 import com.streamability.alexisdaddi.databinding.DetailsFragmentBinding
 import com.streamability.alexisdaddi.databinding.DetailsFragmentBinding.inflate
 import com.streamability.alexisdaddi.databinding.ResultsFragmentBinding.inflate
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding: DetailsFragmentBinding get() = _binding!!
