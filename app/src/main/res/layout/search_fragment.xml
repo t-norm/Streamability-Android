@@ -16,7 +16,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
-        android:background="@color/white"
-
-        android:queryHint="Fuck Me Daddy!"/>
+        android:elevation="8dp"
+        android:background="@drawable/rounded_white"
+        android:submitBackground="@drawable/rounded_white"
+        android:queryBackground="@color/transparent"
+        android:color="@color/black"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryHint="@string/search_hint"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

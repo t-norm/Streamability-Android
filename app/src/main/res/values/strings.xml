@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AlexIsDaddi</string>
+    <string name="app_name">Streamability</string>
+    <string name="search_hint">Search Movies &amp; TV</string>
 </resources>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/rounded_white.xml" value="0.152" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/details_fragment.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/results_fragment.xml" value="0.23697916666666666" />
