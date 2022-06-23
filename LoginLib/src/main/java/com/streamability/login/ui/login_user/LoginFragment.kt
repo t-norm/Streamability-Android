@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 
 import com.streamability.login.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
-    private val binding: FragmentLoginBinding = _binding!!
+    private val binding: FragmentLoginBinding get() = _binding!!
 
     private val viewModel by viewModels<LoginViewModel>()
 
@@ -28,8 +31,24 @@ class LoginFragment : Fragment() {
         initListeners()
     }
 
-    private fun initListeners() {
-        TODO("Not yet implemented")
+    private fun initListeners() = with(binding) {
+        var loginParam = "signIn"
+
+        fun destination() = findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToAccountFragment(loginParam))
+
+        signInBtn.setOnClickListener {
+            destination()
+        }
+
+        signUpBtn.setOnClickListener {
+            loginParam = "signUp"
+            destination()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

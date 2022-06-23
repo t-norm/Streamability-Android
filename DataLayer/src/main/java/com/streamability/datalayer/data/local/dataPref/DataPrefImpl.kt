@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.alecbrando.lib_data_layer.data.local.dataPref.dataprefint.DataPreference
-import com.alecbrando.lib_data_layer.domain.models.DataStoreModel
+import com.streamability.datalayer.domain.models.sharedPref.Login
 import kotlinx.coroutines.flow.*
 import java.lang.Exception
 
@@ -15,16 +15,17 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class DataPrefImpl(private val context: Context): DataPreference {
 
-    override suspend fun setPreference(key: String, value: String) {
-        val preferenceKey = stringPreferencesKey(key)
+    override suspend fun setPreference(value: String) {
+        val preferenceKey = stringPreferencesKey("user")
         context.dataStore.edit {it[preferenceKey] = value}
     }
 
-    override suspend fun collectPreference(): Flow<DataStoreModel> {
-        val dataFlow: Flow<DataStoreModel> = context.dataStore.data.map { preference ->
+    override suspend fun collectPreference(): Flow<Login> {
+        val dataFlow: Flow<Login> = context.dataStore.data.map { preference ->
             val token = preference[stringPreferencesKey("user")] ?: ""
             val username = preference[stringPreferencesKey("username")] ?: ""
-            DataStoreModel(token, username)
+            val password = preference[stringPreferencesKey("password")] ?: ""
+            Login(token, username, password)
         }
         return dataFlow
     }

@@ -1,7 +1,9 @@
 package com.streamability.login.ui.sign_in_up
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AccountViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@HiltViewModel
+class AccountViewModel @Inject constructor() : ViewModel() {
 }

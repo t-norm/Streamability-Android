@@ -1,5 +1,11 @@
 package com.streamability.datalayer.di
 
+import android.content.Context
+import androidx.room.Room
+import com.alecbrando.lib_data_layer.data.local.dataPref.DataPrefImpl
+import com.alecbrando.lib_data_layer.data.local.dataPref.dataprefint.DataPreference
+import com.streamability.datalayer.data.local.room.RoomDao
+import com.streamability.datalayer.data.local.room.RoomDb
 import com.streamability.datalayer.data.remote.MovieDbApiEndpoint
 import com.streamability.datalayer.data.remote.RemoteDataSourceImpl
 import com.streamability.datalayer.data.repo.Repository
@@ -11,6 +17,7 @@ import com.streamability.datalayer.domain.useCases.movieUseCases.WatchProvidersU
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -39,6 +46,20 @@ object RepoModule {
     @Provides
     @Singleton
     fun remoteDataSource(ApiEndpoint: MovieDbApiEndpoint): RemoteDataSource = RemoteDataSourceImpl(ApiEndpoint)
+
+    @Singleton
+    @Provides
+    fun provideDataStore(@ApplicationContext context: Context): DataPreference = DataPrefImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideDao(db: RoomDb): RoomDao = db.RoomDao()
+
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext context: Context): RoomDb =
+        Room.databaseBuilder(context, RoomDb::class.java,"TASK_DB")
+            .fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton
