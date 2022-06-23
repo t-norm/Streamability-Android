@@ -3,25 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/random_img_download"
     tools:context="com.streamability.alexisdaddi.ui.search.SearchFragment">
 
-
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="15dp"
-        android:elevation="8dp"
-        android:background="@drawable/rounded_white"
-        android:submitBackground="@drawable/rounded_white"
-        android:queryBackground="@color/transparent"
-        android:color="@color/black"
-        android:iconifiedByDefault="false"
-        android:inputType="text"
-        android:queryHint="@string/search_hint"/>
+    <include layout="@layout/search_bar_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

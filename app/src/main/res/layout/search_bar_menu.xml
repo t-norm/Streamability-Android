@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue"
+    android:elevation="8dp"
+    android:orientation="horizontal">
+
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="15dp"
+        android:elevation="8dp"
+        android:background="@drawable/rounded_white"
+        android:submitBackground="@drawable/rounded_white"
+        android:queryBackground="@color/transparent"
+        android:color="@color/black"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryHint="@string/search_hint"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu_icon"
+        android:layout_weight="6"
+        android:layout_marginEnd="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
+        android:src="@drawable/ic_baseline_menu_24" />
+</LinearLayout>
