@@ -6,4 +6,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor() : ViewModel() {
+
+    fun valdateUsername(){
+
+    }
+    fun validatePassword(){
+
+    }
+
 }

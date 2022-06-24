@@ -10,7 +10,10 @@ import com.streamability.datalayer.data.remote.MovieDbApiEndpoint
 import com.streamability.datalayer.data.remote.RemoteDataSourceImpl
 import com.streamability.datalayer.data.repo.Repository
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
-import com.streamability.datalayer.domain.useCases.UseCases
+import com.streamability.datalayer.domain.useCases.AuthUseCase
+import com.streamability.datalayer.domain.useCases.MovieUseCases
+import com.streamability.datalayer.domain.useCases.loginUseCases.AuthPasswordUseCase
+import com.streamability.datalayer.domain.useCases.loginUseCases.AuthUsernameUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.MovieDetailsUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.SearchMovieUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.WatchProvidersUseCase
@@ -63,11 +66,20 @@ object RepoModule {
 
     @Provides
     @Singleton
-    fun useCases(repo: Repository): UseCases {
-        return UseCases(
+    fun movieUseCases(repo: Repository): MovieUseCases {
+        return MovieUseCases(
             movieDetailsUseCase = MovieDetailsUseCase(repo),
             searchMovieUseCase = SearchMovieUseCase(repo),
             watchProvidersUseCase = WatchProvidersUseCase(repo)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun authUseCases(repo: Repository): AuthUseCase {
+        return AuthUseCase(
+            authUsernameUseCase = AuthUsernameUseCase(repo),
+            authPasswordUseCase = AuthPasswordUseCase(repo)
         )
     }
 }
