@@ -4,7 +4,6 @@
         android:id="@+id/nav_drawer_darkmode_group">
         <item
             android:id="@+id/darkmode_item"
-            android:icon="@drawable/ic_baseline_dark_mode_24"
             android:title="@string/dark_mode" />
     </group>
 
