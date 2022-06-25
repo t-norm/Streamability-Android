@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Streamability</string>
     <string name="search_hint">Search Movies &amp; TV</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="region">Change Region</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="settings">Settings</string>
 </resources>

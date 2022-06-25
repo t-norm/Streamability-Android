@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/random_img_download"
     tools:context="com.streamability.alexisdaddi.ui.search.SearchFragment">
 
-    <include layout="@layout/search_bar_menu" />
+    <include
+        android:id="@+id/options"
+        layout="@layout/options_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

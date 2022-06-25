@@ -12,6 +12,7 @@
     <!--  Custom Colors  -->
     <color name="transparent">#00000000</color>
     <color name="less_black">#FF393939</color>
+    <color name="nav_gray">#F0F0F0</color>
     <color name="border_gray">#FFD3D3D3</color>
     <color name="cursor_gray">#FFB3B3B3</color>
     <color name="blue">#FF1F78A0</color>
