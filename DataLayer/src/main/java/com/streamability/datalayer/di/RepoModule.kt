@@ -31,7 +31,7 @@ object RepoModule {
         return Retrofit
             .Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.themoviedb.org/3")
+            .baseUrl("https://api.themoviedb.org/3/")
             .build()
             .create(MovieDbApiEndpoint::class.java)
     }

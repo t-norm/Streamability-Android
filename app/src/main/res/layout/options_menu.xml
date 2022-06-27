@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:openDrawer="start">
+    android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
@@ -27,22 +26,23 @@
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:background="@color/blue">
 
-            <SearchView
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:layout_marginEnd="16dp"
-                android:elevation="8dp"
-                android:searchIcon="@drawable/ic_baseline_search_24"
-                android:closeIcon="@drawable/ic_baseline_close_24"
-                android:background="@drawable/rounded_white"
-                android:submitBackground="@drawable/rounded_white"
-                android:queryBackground="@color/transparent"
-                android:color="@color/black"
-                android:iconifiedByDefault="false"
-                android:inputType="text"
-                android:queryHint="@string/search_hint"/>
+                <SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:elevation="8dp"
+                    android:searchIcon="@drawable/ic_baseline_search_24"
+                    android:closeIcon="@drawable/ic_baseline_close_24"
+                    android:imeOptions="actionSend"
+                    android:background="@drawable/rounded_white"
+                    android:submitBackground="@drawable/rounded_white"
+                    android:queryBackground="@color/transparent"
+                    android:color="@color/black"
+                    android:iconifiedByDefault="false"
+                    android:inputType="text"
+                    android:queryHint="@string/search_hint"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -57,5 +57,4 @@
         app:itemIconSize="32sp"
         app:headerLayout="@layout/header_navigation_drawer"
         app:itemTextAppearance="@style/options_text" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

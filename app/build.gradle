@@ -8,6 +8,9 @@ plugins {
 }
 
 android {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     compileSdk 32
 
     defaultConfig {
@@ -21,6 +24,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            resValue("string", "moviedb_api_key", localProperties['API_KEY_V3'])
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -75,4 +81,7 @@ dependencies {
 
     // Material
     implementation 'com.google.android.material:material:1.6.1'
+
+    // Accessing data layer module
+    implementation(project(":DataLayer"))
 }

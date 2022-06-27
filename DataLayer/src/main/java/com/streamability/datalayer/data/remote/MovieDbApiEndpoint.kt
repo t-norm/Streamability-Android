@@ -12,19 +12,19 @@ import retrofit2.http.Query
  Interface for movieDb api. Lists given endpoints
  */
 interface MovieDbApiEndpoint {
-    @GET("/search/movie")
+    @GET("search/movie")
     suspend fun getMovieSearch(
         @Query("api_key") apiKey: String,
         @Query("query") query: String
     ): Response<SearchMovieModel>
 
-    @GET("/movie/{movie_id}")
+    @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String
     ): Response<MovieDetailsModel>
 
-    @GET("/movie/{movie_id}/watch/providers")
+    @GET("movie/{movie_id}/watch/providers")
     suspend fun getMovieWatchProviders(
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String
