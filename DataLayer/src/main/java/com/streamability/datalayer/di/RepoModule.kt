@@ -12,8 +12,7 @@ import com.streamability.datalayer.data.repo.Repository
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
 import com.streamability.datalayer.domain.useCases.AuthUseCase
 import com.streamability.datalayer.domain.useCases.MovieUseCases
-import com.streamability.datalayer.domain.useCases.loginUseCases.AuthPasswordUseCase
-import com.streamability.datalayer.domain.useCases.loginUseCases.AuthUsernameUseCase
+import com.streamability.datalayer.domain.useCases.loginUseCases.*
 import com.streamability.datalayer.domain.useCases.movieUseCases.MovieDetailsUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.SearchMovieUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.WatchProvidersUseCase
@@ -41,7 +40,7 @@ object RepoModule {
         return Retrofit
             .Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.themoviedb.org/3")
+            .baseUrl("https://api.themoviedb.org/3/")
             .build()
             .create(MovieDbApiEndpoint::class.java)
     }
@@ -79,7 +78,10 @@ object RepoModule {
     fun authUseCases(repo: Repository): AuthUseCase {
         return AuthUseCase(
             authUsernameUseCase = AuthUsernameUseCase(repo),
-            authPasswordUseCase = AuthPasswordUseCase(repo)
+            authPasswordUseCase = AuthPasswordUseCase(repo),
+            deleteDataStoreUseCase = DeleteDataStoreUseCase(repo),
+            getDataStoreUseCase = GetDataStoreUseCase(repo),
+            setDataStoreUseCase = SetDataStoreUseCase(repo)
         )
     }
 }

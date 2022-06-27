@@ -76,6 +76,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     kapt 'com.github.bumptech.glide:compiler:4.13.1'
 
-    api(project(":LoginLib"))
-
+    implementation(project(":LoginLib"))
+    implementation(project(":DataLayer"))
 }

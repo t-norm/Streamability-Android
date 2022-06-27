@@ -1,17 +1,22 @@
 package com.streamability.datalayer.data.repo
 
+import com.alecbrando.lib_data_layer.data.local.dataPref.dataprefint.DataPreference
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
 import com.streamability.datalayer.domain.models.movieDetails.MovieDetailsModel
 import com.streamability.datalayer.domain.models.movieWatchProviders.MovieWatchProvidersModel
 import com.streamability.datalayer.domain.models.searchMovie.SearchMovieModel
+import com.streamability.datalayer.domain.models.sharedPref.Login
 import com.streamability.datalayer.utils.Resource
 import com.streamability.datalayer.utils.Validation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 /***
 Repo where we will handle api and local room calls. injecting Remote and Local
 implementations so we can access the calls
  */
 class Repository @Inject constructor(
+    private val local: DataPreference,
     private val remote: RemoteDataSource,
     private val validate: Validation
     ) {
@@ -51,5 +56,15 @@ class Repository @Inject constructor(
 
     fun checkInputForm(inputForm: String, string: String): String{
         return validate.validateForm(inputForm, string)
+    }
+
+    suspend fun setDataStore(username: String, password: String) {
+        local.setPreference(username, password)
+    }
+    suspend fun getDataStore(): Flow<Login> {
+        return local.collectPreference()
+    }
+    suspend fun deleteDataStore() {
+        local.removeUser()
     }
 }

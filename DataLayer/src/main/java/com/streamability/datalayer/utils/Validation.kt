@@ -1,6 +1,9 @@
 package com.streamability.datalayer.utils
 
-class Validation {
+import android.util.Log
+import javax.inject.Inject
+
+class Validation @Inject constructor(){
     fun validateForm(inputForm: String, string: String): String{
         when (inputForm) {
             "username" -> {
@@ -48,6 +51,6 @@ class Validation {
     companion object Regex {
         const val ALLOWED_CHAR = "[a-zA-Z0-9]"
         const val MIN_MAX_LENGTH_8_20 = "(?=.{8,25}\$)"
-        const val NON_ALPHA_NUM = "('\'W)+"
+        const val NON_ALPHA_NUM = "(\\W)+"
     }
 }
