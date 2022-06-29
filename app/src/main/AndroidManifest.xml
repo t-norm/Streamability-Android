@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DayMode"
-        android:name=".BaseApplication">
+        android:name="com.streamability.alexisdaddi.BaseApplication">
         <activity
             android:name="com.streamability.alexisdaddi.MainActivity"
             android:exported="true">

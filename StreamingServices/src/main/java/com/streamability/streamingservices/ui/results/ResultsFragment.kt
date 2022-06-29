@@ -1,15 +1,11 @@
-package com.streamability.alexisdaddi.ui.results
+package com.streamability.streamingservices.ui.results
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.streamability.alexisdaddi.R
-import com.streamability.alexisdaddi.databinding.ResultsFragmentBinding
-import com.streamability.alexisdaddi.ui.results.ResultsViewModel
+import com.streamability.streamingservices.databinding.ResultsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

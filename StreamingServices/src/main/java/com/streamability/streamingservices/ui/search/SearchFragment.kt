@@ -1,7 +1,5 @@
-package com.streamability.alexisdaddi.ui.search
+package com.streamability.streamingservices.ui.search
 
-
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,18 +7,17 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
-import com.streamability.alexisdaddi.R
-import com.streamability.alexisdaddi.databinding.SearchFragmentBinding
+import com.streamability.streamingservices.R
+import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
-    private var _binding: SearchFragmentBinding? = null
-    private val binding: SearchFragmentBinding get() = _binding!!
+    private var _binding: FragmentSearchBinding? = null
+    private val binding: FragmentSearchBinding get() = _binding!!
 
     private val viewModel by viewModels<SearchViewModel>()
 
@@ -28,7 +25,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = SearchFragmentBinding.inflate(inflater, container, false).also {
+    ) = FragmentSearchBinding.inflate(inflater, container, false).also {
         _binding = it
     }.root
 

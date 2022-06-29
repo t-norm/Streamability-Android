@@ -1,4 +1,4 @@
-package com.streamability.alexisdaddi
+package com.streamability.streamingservices
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint

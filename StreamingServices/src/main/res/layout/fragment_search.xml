@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/random_img_download"
-    tools:context="com.streamability.alexisdaddi.ui.search.SearchFragment">
+    tools:context="com.streamability.streamingservices.ui.search.SearchFragment">
 
     <include
         android:id="@+id/options"

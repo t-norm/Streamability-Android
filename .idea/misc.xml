@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="StreamingServices/src/main/res/drawable/rounded_white.xml" value="0.152" />
+        <entry key="StreamingServices/src/main/res/layout/activity_main.xml" value="0.23697916666666666" />
+        <entry key="StreamingServices/src/main/res/layout/details_fragment.xml" value="0.23697916666666666" />
+        <entry key="StreamingServices/src/main/res/layout/fragment_search.xml" value="0.22291666666666668" />
+        <entry key="StreamingServices/src/main/res/layout/header_navigation_drawer.xml" value="0.23697916666666666" />
+        <entry key="StreamingServices/src/main/res/layout/options_menu.xml" value="0.23697916666666666" />
+        <entry key="StreamingServices/src/main/res/layout/results_fragment.xml" value="0.23697916666666666" />
+        <entry key="StreamingServices/src/main/res/layout/search_fragment.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1295" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1295" />
         <entry key="app/src/main/res/drawable/rounded_white.xml" value="0.152" />
