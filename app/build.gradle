@@ -84,4 +84,6 @@ dependencies {
 
     // Accessing data layer module
     implementation(project(":DataLayer"))
+    implementation(project(":LoginLib"))
+    implementation(project(":StreamingServices"))
 }
