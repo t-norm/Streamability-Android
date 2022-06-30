@@ -4,6 +4,7 @@ import com.alecbrando.lib_data_layer.data.local.dataPref.dataprefint.DataPrefere
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
 import com.streamability.datalayer.domain.models.movieDetails.MovieDetailsModel
 import com.streamability.datalayer.domain.models.movieWatchProviders.MovieWatchProvidersModel
+import com.streamability.datalayer.domain.models.searchMovie.Result
 import com.streamability.datalayer.domain.models.searchMovie.SearchMovieModel
 import com.streamability.datalayer.domain.models.sharedPref.Login
 import com.streamability.datalayer.utils.Resource
@@ -21,11 +22,11 @@ class Repository @Inject constructor(
     private val validate: Validation
     ) {
 
-    suspend fun getMovieSearch(apiKey: String, query: String): Resource<SearchMovieModel?> {
+    suspend fun getMovieSearch(apiKey: String, query: String): Resource<List<Result>> {
         val movieSearch = remote.searchMovie(apiKey, query)
 
         return if (movieSearch.isSuccessful) {
-            val search = movieSearch.body()
+            val search = movieSearch.body()?.results!!
             Resource.Success(search)
         } else {
             Resource.Error("API call failed")

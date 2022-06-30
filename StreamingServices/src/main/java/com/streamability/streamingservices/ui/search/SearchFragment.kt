@@ -7,9 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.streamability.datalayer.utils.Resource
 import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,6 +100,7 @@ class SearchFragment : Fragment() {
         searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryString: String): Boolean {
                 viewModel.searchMovie(apiKey, queryString)
+                observeSearchState()
                 return false
             }
 
@@ -104,5 +108,25 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    private fun navigateToWatchProviders(){
+        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+    }
+
+    private fun observeSearchState() = with(binding){
+        viewModel.searchMovieState.observe(viewLifecycleOwner) { searchMovie ->
+            when (searchMovie) {
+                is Resource.Success -> {
+                    /* TODO: Do something when search query is successful */
+                }
+                is Resource.Loading -> {
+                    /* TODO: Do something when search query is loading */
+                }
+                is Resource.Error -> {
+                    /* TODO: Do something when search query has an error */
+                }
+            }
+        }
     }
 }
