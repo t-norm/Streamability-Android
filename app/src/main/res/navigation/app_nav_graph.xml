@@ -3,15 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/login_nav_graph">
-    <include app:graph = "@navigation/login_nav_graph" />
+    app:startDestination="@id/rootFragment">
+
+    <include app:graph="@navigation/streaming_services_nav_graph" />
+
     <fragment
-        android:id="@+id/testFragment"
-        android:name="com.streamability.alexisdaddi.ui.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" >
+        android:id="@+id/rootFragment"
+        android:name="com.streamability.alexisdaddi.ui.root.RootFragment"
+        android:label="fragment_root"
+        tools:layout="@layout/fragment_root" >
         <action
-            android:id="@+id/action_testFragment_to_nav_graph"
-            app:destination="@id/login_nav_graph" />
+            android:id="@+id/action_rootFragment_to_nav_graph"
+            app:destination="@id/nav_graph" />
     </fragment>
 </navigation>
