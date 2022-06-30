@@ -16,3 +16,4 @@ rootProject.name = "AlexIsDaddi"
 include ':app'
 include ':DataLayer'
 include ':LoginLib'
+include ':StreamingServices'

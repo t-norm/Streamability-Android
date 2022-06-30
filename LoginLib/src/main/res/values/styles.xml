@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="LoginBtnLayout" parent="Widget.Material3.Button">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:elevation">16dp</item>
+    </style>
+
+<!--    Custom Color    -->
+    <color name="black">#000</color>
+    <color name="login_btn">#FF154671</color>
+    <color name="login_btn_text">#FFCFCECE</color>
+    <color name="sign_up">#FFD3E1EE</color>
+    <color name="sign_up_text">#FF10102D</color>
+
+    <style name="PrimaryButton"
+        parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/loginThemeOverlay</item>
+    </style>
+
+    <style name="SecondaryButton"
+        parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/signUpThemeOverlay</item>
+    </style>
+
+    <style name="loginThemeOverlay">
+        <item name="colorPrimary">@color/login_btn</item>
+    </style>
+
+    <style name="signUpThemeOverlay">
+        <item name="colorPrimary">@color/sign_up</item>
+    </style>
+</resources>
