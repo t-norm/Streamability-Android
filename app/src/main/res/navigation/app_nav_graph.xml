@@ -7,6 +7,8 @@
 
     <include app:graph="@navigation/streaming_services_nav_graph" />
 
+    <include app:graph="@navigation/login_nav_graph" />
+
     <fragment
         android:id="@+id/rootFragment"
         android:name="com.streamability.alexisdaddi.ui.root.RootFragment"
@@ -15,5 +17,9 @@
         <action
             android:id="@+id/action_rootFragment_to_nav_graph"
             app:destination="@id/nav_graph" />
+        <action
+            android:id="@+id/action_rootFragment_to_login_nav_graph"
+            app:destination="@id/login_nav_graph" />
+
     </fragment>
 </navigation>

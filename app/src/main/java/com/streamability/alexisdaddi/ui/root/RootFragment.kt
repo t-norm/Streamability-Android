@@ -29,7 +29,7 @@ class RootFragment : Fragment() {
     }
 
     private fun goToStreamingService(){
-        findNavController().navigate(RootFragmentDirections.actionRootFragmentToNavGraph())
+        findNavController().navigate(RootFragmentDirections.actionRootFragmentToLoginNavGraph())
     }
 
 }
