@@ -1,21 +1,22 @@
 package com.streamability.streamingservices.ui.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.streamability.datalayer.utils.Resource
 import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -83,11 +84,11 @@ class SearchFragment : Fragment() {
                     true
                 }
                 R.id.region_item -> {
-                    // code here
+                    /* TODO: code for changing region */
                     true
                 }
                 R.id.logout_item -> {
-                    // code here
+                    /* TODO: code for logging out */
                     true
                 }
                 else -> {
@@ -100,6 +101,7 @@ class SearchFragment : Fragment() {
         searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryString: String): Boolean {
                 viewModel.searchMovie(apiKey, queryString)
+
                 observeSearchState()
                 return false
             }
@@ -118,13 +120,17 @@ class SearchFragment : Fragment() {
         viewModel.searchMovieState.observe(viewLifecycleOwner) { searchMovie ->
             when (searchMovie) {
                 is Resource.Success -> {
-                    /* TODO: Do something when search query is successful */
+                    searchProgressBar.visibility = View.INVISIBLE
                 }
                 is Resource.Loading -> {
-                    /* TODO: Do something when search query is loading */
+                    searchProgressBar.visibility = View.VISIBLE
                 }
                 is Resource.Error -> {
-                    /* TODO: Do something when search query has an error */
+                    Snackbar.make(
+                        searchProgressBar,
+                        "An error occurred, please try again.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
