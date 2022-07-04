@@ -18,7 +18,6 @@ import com.streamability.datalayer.utils.Resource
 import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import com.streamability.streamingservices.ui.search.adapter.SearchResultsAdapter
-import com.streamability.streamingservices.ui.search.adapter.SearchResultsItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -116,10 +115,6 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun navigateToWatchProviders(){
-        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
-    }
-
     private fun observeSearchState() = with(binding){
         viewModel.searchMovieState.observe(viewLifecycleOwner) { searchMovie ->
             when (searchMovie) {
@@ -150,10 +145,14 @@ class SearchFragment : Fragment() {
     }
 
     private fun populateSearchResultsRecyclerView(movieResults: List<Result>) = with(binding) {
-        val recyclerview = searchResultsRecyclerview
+        val recyclerview = options.searchResultsRecyclerview
         val adapter = SearchResultsAdapter().apply {applyData(movieResults)}
 
         recyclerview.searchResultsRecyclerview.layoutManager = LinearLayoutManager(activity)
         recyclerview.searchResultsRecyclerview.adapter = adapter
+    }
+
+    private fun navigateToWatchProviders(){
+        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
     }
 }
