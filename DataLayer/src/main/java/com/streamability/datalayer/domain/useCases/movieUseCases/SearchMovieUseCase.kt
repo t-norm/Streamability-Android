@@ -10,7 +10,7 @@ use case to call repo. Use case will interact with View model
  */
 
 class SearchMovieUseCase(private val repo: Repository) {
-    suspend operator fun invoke(apiKey: String, query: String): Resource<List<Result>> {
+    suspend operator fun invoke(apiKey: String, query: String): Resource<SearchMovieModel?> {
         return repo.getMovieSearch(apiKey, query)
     }
 }

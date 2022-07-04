@@ -22,11 +22,11 @@ class Repository @Inject constructor(
     private val validate: Validation
     ) {
 
-    suspend fun getMovieSearch(apiKey: String, query: String): Resource<List<Result>> {
+    suspend fun getMovieSearch(apiKey: String, query: String): Resource<SearchMovieModel?> {
         val movieSearch = remote.searchMovie(apiKey, query)
 
         return if (movieSearch.isSuccessful) {
-            val search = movieSearch.body()?.results!!
+            val search = movieSearch.body()
             Resource.Success(search)
         } else {
             Resource.Error("API call failed")

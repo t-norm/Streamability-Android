@@ -11,10 +11,14 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.streamability.datalayer.domain.models.searchMovie.Result
 import com.streamability.datalayer.utils.Resource
 import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
+import com.streamability.streamingservices.ui.search.adapter.SearchResultsAdapter
+import com.streamability.streamingservices.ui.search.adapter.SearchResultsItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -120,7 +124,16 @@ class SearchFragment : Fragment() {
         viewModel.searchMovieState.observe(viewLifecycleOwner) { searchMovie ->
             when (searchMovie) {
                 is Resource.Success -> {
-                    searchProgressBar.visibility = View.INVISIBLE
+                    searchProgressBar.visibility = View.GONE
+                    if (searchMovie.data?.results!!.isNotEmpty()) {
+                        populateSearchResultsRecyclerView(searchMovie.data?.results!!)
+                    } else {
+                        Snackbar.make(
+                            searchProgressBar,
+                            "Your search returned no results. Try again.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 }
                 is Resource.Loading -> {
                     searchProgressBar.visibility = View.VISIBLE
@@ -134,5 +147,13 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun populateSearchResultsRecyclerView(movieResults: List<Result>) = with(binding) {
+        val recyclerview = searchResultsRecyclerview
+        val adapter = SearchResultsAdapter().apply {applyData(movieResults)}
+
+        recyclerview.searchResultsRecyclerview.layoutManager = LinearLayoutManager(activity)
+        recyclerview.searchResultsRecyclerview.adapter = adapter
     }
 }
