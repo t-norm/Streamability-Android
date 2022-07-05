@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:showIn="@layout/fragment_search">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
@@ -11,6 +12,7 @@
     android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
@@ -39,19 +41,21 @@
                     android:background="@drawable/rounded_white"
                     android:submitBackground="@drawable/rounded_white"
                     android:queryBackground="@color/transparent"
-                    android:color="@color/black"
                     android:iconifiedByDefault="false"
                     android:inputType="text"
                     android:queryHint="@string/search_hint"/>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/options_menu_recyclerview"
+            layout="@layout/search_results_recyclerview" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/nav_gray"
         android:layout_gravity="start"
         app:menu="@menu/nav_drawer_menu"
         app:itemIconSize="32sp"

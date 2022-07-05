@@ -16,4 +16,5 @@
     <color name="border_gray">#FFD3D3D3</color>
     <color name="cursor_gray">#FFB3B3B3</color>
     <color name="blue">#FF1F78A0</color>
+    <color name="dark_blue">#E66D77F3</color>
 </resources>

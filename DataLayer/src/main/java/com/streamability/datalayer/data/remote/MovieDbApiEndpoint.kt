@@ -15,7 +15,8 @@ interface MovieDbApiEndpoint {
     @GET("search/movie")
     suspend fun getMovieSearch(
         @Query("api_key") apiKey: String,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("page") page: Int = 1
     ): Response<SearchMovieModel>
 
     @GET("movie/{movie_id}")

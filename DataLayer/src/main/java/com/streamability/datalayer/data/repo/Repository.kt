@@ -4,6 +4,7 @@ import com.alecbrando.lib_data_layer.data.local.dataPref.dataprefint.DataPrefere
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
 import com.streamability.datalayer.domain.models.movieDetails.MovieDetailsModel
 import com.streamability.datalayer.domain.models.movieWatchProviders.MovieWatchProvidersModel
+import com.streamability.datalayer.domain.models.searchMovie.Result
 import com.streamability.datalayer.domain.models.searchMovie.SearchMovieModel
 import com.streamability.datalayer.domain.models.sharedPref.Login
 import com.streamability.datalayer.utils.Resource
