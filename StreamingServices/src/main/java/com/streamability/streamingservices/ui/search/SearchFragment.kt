@@ -1,18 +1,26 @@
 package com.streamability.streamingservices.ui.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -34,6 +42,10 @@ class SearchFragment : Fragment() {
 
         initViews()
         initListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onDestroy() {
@@ -85,6 +97,15 @@ class SearchFragment : Fragment() {
                 }
                 R.id.logout_item -> {
                     // code here
+                    viewModel.deleteDataStore()
+                    lifecycleScope.launch {
+                        delay(500)
+                        findNavController().popBackStack()
+                    }
+
+//                    val intent = Intent(requireContext(), this::class.java)
+//                    activity?.startActivity(intent)
+//                    activity?.finishAffinity()
                     true
                 }
                 else -> {

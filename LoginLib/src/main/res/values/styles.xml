@@ -12,7 +12,7 @@
 <!--    Custom Color    -->
     <color name="black">#000</color>
     <color name="login_btn">#FF154671</color>
-    <color name="login_btn_text">#FFCFCECE</color>
+    <color name="login_btn_text">#E6E6E6</color>
     <color name="sign_up">#FFD3E1EE</color>
     <color name="sign_up_text">#FF10102D</color>
 
