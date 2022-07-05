@@ -11,7 +11,9 @@ import com.bumptech.glide.Glide
 import com.streamability.datalayer.domain.models.searchMovie.Result
 import com.streamability.streamingservices.R
 
-class SearchResultsAdapter: RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
+class SearchResultsAdapter(
+    private val navigateToDetails: (id: Int) -> Unit,
+): RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
     private lateinit var searchResultsList: List<Result>
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
@@ -35,6 +37,10 @@ class SearchResultsAdapter: RecyclerView.Adapter<SearchResultsAdapter.ViewHolder
         holder.textViewTitle.text = movieItem.title
         holder.textViewReleaseDate.text = movieItem.release_date.substring(0,4)
         holder.textViewOverview.text = movieItem.overview
+
+        holder.itemView.setOnClickListener {
+            navigateToDetails(movieItem.id)
+        }
     }
 
     override fun getItemCount(): Int {

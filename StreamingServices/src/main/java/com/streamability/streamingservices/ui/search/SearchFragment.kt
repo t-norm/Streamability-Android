@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -50,18 +51,7 @@ class SearchFragment : Fragment() {
 
     // custom functions
     private fun initViews() {
-        fun getMenuItem(menuItem: Int): MenuItem = with(binding) {
-            return options.navView.menu.findItem(menuItem)
-        }
-
-        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES)
-        {
-            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_light_mode_24)
-            getMenuItem(R.id.darkmode_item).title = "Light Mode"
-        } else {
-            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_dark_mode_24)
-            getMenuItem(R.id.darkmode_item).title = "Dark Mode"
-        }
+        toggleDarkMode()
     }
 
     private fun initListeners() = with(binding) {
@@ -146,13 +136,52 @@ class SearchFragment : Fragment() {
 
     private fun populateSearchResultsRecyclerView(movieResults: List<Result>) = with(binding) {
         val recyclerview = options.optionsMenuRecyclerview
-        val adapter = SearchResultsAdapter().apply {applyData(movieResults)}
+        val adapter = SearchResultsAdapter(::navigateToWatchProviders).apply {applyData(movieResults)}
 
         recyclerview.searchResultsRecyclerview.layoutManager = LinearLayoutManager(activity)
         recyclerview.searchResultsRecyclerview.adapter = adapter
     }
 
-    private fun navigateToWatchProviders(){
-        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+    private fun toggleDarkMode() = with(binding){
+        fun getMenuItem(menuItem: Int): MenuItem {
+            return options.navView.menu.findItem(menuItem)
+        }
+
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES)
+        {
+            // darkmode
+            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_light_mode_24)
+            getMenuItem(R.id.darkmode_item).title = "Light Mode"
+
+            searchFragmentViewContainer.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.dark_mode_img)
+            }
+
+            options.searchBar.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.rounded_gray)
+            }
+
+            options.appBarLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_blue))
+            options.topAppBar.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+        } else {
+            // lightmode
+            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_dark_mode_24)
+            getMenuItem(R.id.darkmode_item).title = "Dark Mode"
+
+            searchFragmentViewContainer.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.random_img_download)
+            }
+
+            options.searchBar.background = activity?.let {
+                ContextCompat.getDrawable(it, R.drawable.rounded_white)
+            }
+
+            options.appBarLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            options.topAppBar.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blue))
+        }
+    }
+
+    private fun navigateToWatchProviders(id: Int) {
+        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id))
     }
 }
