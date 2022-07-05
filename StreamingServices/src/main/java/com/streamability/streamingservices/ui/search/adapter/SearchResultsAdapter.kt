@@ -13,13 +13,14 @@ import com.streamability.streamingservices.R
 
 class SearchResultsAdapter(
     private val navigateToDetails: (id: Int) -> Unit,
-): RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
     private lateinit var searchResultsList: List<Result>
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.search_results_card_imageview)
         val textViewTitle: TextView = itemView.findViewById(R.id.search_results_card_title)
-        val textViewReleaseDate: TextView = itemView.findViewById(R.id.search_results_card_release_date)
+        val textViewReleaseDate: TextView =
+            itemView.findViewById(R.id.search_results_card_release_date)
         val textViewOverview: TextView = itemView.findViewById(R.id.search_results_card_overview)
     }
 
@@ -35,7 +36,7 @@ class SearchResultsAdapter(
 
         holder.imageView.loadImage(movieItem.poster_path)
         holder.textViewTitle.text = movieItem.title
-        holder.textViewReleaseDate.text = movieItem.release_date.substring(0,4)
+        holder.textViewReleaseDate.text = movieItem.release_date.substring(0, 4)
         holder.textViewOverview.text = movieItem.overview
 
         holder.itemView.setOnClickListener {

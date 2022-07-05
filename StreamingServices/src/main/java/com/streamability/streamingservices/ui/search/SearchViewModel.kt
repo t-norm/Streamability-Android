@@ -25,7 +25,7 @@ class SearchViewModel @Inject constructor(
         _searchMovieState.value = movieUseCases.searchMovieUseCase(apiKey, query)
     }
 
-    fun deleteDataStore() = viewModelScope.launch{
+    fun deleteDataStore() = viewModelScope.launch {
         loginUseCases.deleteDataStoreUseCase()
     }
 }
