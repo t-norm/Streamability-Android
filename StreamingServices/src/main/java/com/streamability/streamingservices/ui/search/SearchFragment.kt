@@ -145,7 +145,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun populateSearchResultsRecyclerView(movieResults: List<Result>) = with(binding) {
-        val recyclerview = options.searchResultsRecyclerview
+        val recyclerview = options.optionsMenuRecyclerview
         val adapter = SearchResultsAdapter().apply {applyData(movieResults)}
 
         recyclerview.searchResultsRecyclerview.layoutManager = LinearLayoutManager(activity)

@@ -48,7 +48,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include
-            android:id="@+id/search_results_recyclerview"
+            android:id="@+id/options_menu_recyclerview"
             layout="@layout/search_results_recyclerview" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
