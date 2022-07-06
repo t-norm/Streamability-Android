@@ -1,6 +1,7 @@
 package com.streamability.datalayer.domain.useCases.movieUseCases
 
 import com.streamability.datalayer.data.repo.Repository
+import com.streamability.datalayer.domain.models.searchMovie.Result
 import com.streamability.datalayer.domain.models.searchMovie.SearchMovieModel
 import com.streamability.datalayer.utils.Resource
 

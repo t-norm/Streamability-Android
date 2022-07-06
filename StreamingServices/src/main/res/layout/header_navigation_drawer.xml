@@ -2,12 +2,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/blue"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:scaleY=".75"
+        android:scaleX=".75"
+        android:src="@drawable/ic_baseline_settings_24" />
 
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_gravity="center"
     android:textAppearance="?attr/textAppearanceHeadline4"
     android:textColor="@color/white"
     android:text="@string/settings" />

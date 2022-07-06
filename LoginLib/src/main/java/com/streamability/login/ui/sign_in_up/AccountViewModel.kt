@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.streamability.datalayer.domain.useCases.AuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,12 +19,15 @@ class AccountViewModel @Inject constructor(
 ) : ViewModel() {
     lateinit var username: String
     lateinit var password: String
+    lateinit var loginUser: String
+    lateinit var loginPass: String
 
     private val _isUsernameFilled: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isUsernameFilled: LiveData<Boolean> get() = _isUsernameFilled
 
     private val _isPasswordFilled: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isPasswordFilled: LiveData<Boolean> get() = _isPasswordFilled
+
+    private val _signInSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val signInSuccess: LiveData<Boolean> = _signInSuccess
 
     private val _userErrorResponse: MutableLiveData<String> = MutableLiveData()
     val userErrorResponse: LiveData<String> get() = _userErrorResponse
@@ -41,14 +48,36 @@ class AccountViewModel @Inject constructor(
         _isPasswordFilled.value = _passwordErrorResponse.value == "Password works!"
     }
 
+
     fun isBtnDisabled(){
         _isSignUpBtnDisabled.value = !(_isUsernameFilled.value!! && _isPasswordFilled.value!!)
+    }
+
+    fun setFilledFormToFalse(){
+        _isUsernameFilled.value = false
+        _isPasswordFilled.value = false
+    }
+
+    fun isLoginUsernameFilled(flag: Boolean){
+        _isUsernameFilled.value = flag
+    }
+
+    fun isLoginPasswordFilled(flag: Boolean){
+        _isPasswordFilled.value = flag
     }
 
     fun setDataStore(user: String, pw: String) = viewModelScope.launch{
         username = user
         password = pw
-        authUseCase.setDataStoreUseCase(username, password)
+        _signInSuccess.value = authUseCase.setDataStoreUseCase(username, password)
+    }
+
+    fun getDataStore() = viewModelScope.launch(Dispatchers.Main){
+       val user =  authUseCase.getDataStoreUseCase().singleOrNull()
+       if (user?.username != null && user.password != ""){
+           loginUser = user.username
+           loginPass = user.password
+       }
     }
 
 }
