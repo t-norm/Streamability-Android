@@ -30,6 +30,11 @@ class SearchFragment : Fragment() {
     private val viewModel by viewModels<SearchViewModel>()
 
     // override lifecycle functions
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.isDarkMode()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +44,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
         initListeners()
     }
@@ -51,7 +55,7 @@ class SearchFragment : Fragment() {
 
     // custom functions
     private fun initViews() {
-        toggleDarkMode()
+        getDarkMode()
     }
 
     private fun initListeners() = with(binding) {
@@ -68,10 +72,11 @@ class SearchFragment : Fragment() {
         settingsMenu.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.darkmode_item -> {
-                    if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    } else {
+                    viewModel.setDarkMode(!viewModel.darkMode.value!!)
+                    if (viewModel.darkMode.value!!) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     }
                     true
                 }
@@ -112,7 +117,10 @@ class SearchFragment : Fragment() {
             return options.navView.menu.findItem(menuItem)
         }
 
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        val darkModeFlag = viewModel.darkMode.value!!
+
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        if (darkModeFlag) {
             // darkmode
             getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_light_mode_24)
             getMenuItem(R.id.darkmode_item).title = "Light Mode"
@@ -210,5 +218,69 @@ class SearchFragment : Fragment() {
                 id
             )
         )
+    }
+
+    private fun getDarkMode() = with(binding) {
+        fun getMenuItem(menuItem: Int): MenuItem {
+            return options.navView.menu.findItem(menuItem)
+        }
+        viewModel.darkMode.observe(viewLifecycleOwner) { isDarkMode ->
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+                getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_light_mode_24)
+                getMenuItem(R.id.darkmode_item).title = "Light Mode"
+
+                searchFragmentViewContainer.background = activity?.let {
+                    androidx.core.content.ContextCompat.getDrawable(it, R.drawable.dark_mode_img)
+                }
+
+                options.searchBar.background = activity?.let {
+                    androidx.core.content.ContextCompat.getDrawable(it, R.drawable.rounded_gray)
+                }
+
+                options.appBarLayout.setBackgroundColor(
+                    androidx.core.content.ContextCompat.getColor(
+                        requireContext(),
+                        R.color.dark_blue
+                    )
+                )
+                options.topAppBar.setBackgroundColor(
+                    androidx.core.content.ContextCompat.getColor(
+                        requireContext(),
+                        R.color.transparent
+                    )
+                )
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+                getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_dark_mode_24)
+                getMenuItem(R.id.darkmode_item).title = "Dark Mode"
+
+                searchFragmentViewContainer.background = activity?.let {
+                    androidx.core.content.ContextCompat.getDrawable(
+                        it,
+                        R.drawable.random_img_download
+                    )
+                }
+
+                options.searchBar.background = activity?.let {
+                    androidx.core.content.ContextCompat.getDrawable(it, R.drawable.rounded_white)
+                }
+
+                options.appBarLayout.setBackgroundColor(
+                    androidx.core.content.ContextCompat.getColor(
+                        requireContext(),
+                        R.color.blue
+                    )
+                )
+                options.topAppBar.setBackgroundColor(
+                    androidx.core.content.ContextCompat.getColor(
+                        requireContext(),
+                        R.color.blue
+                    )
+                )
+            }
+        }
     }
 }
