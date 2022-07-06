@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Streamability</string>
+    <string name="app_slogan_pt1">Premium Search Engine For Movies &amp; TV</string>
+    <string name="app_slogan_pt2">Search. Pick. Binge.</string>
     <string name="search_hint">Search Movies &amp; TV</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>

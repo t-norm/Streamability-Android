@@ -1,8 +1,11 @@
 package com.streamability.login.ui.sign_in_up
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +13,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.streamability.login.R
 import com.streamability.login.databinding.AccountFragmentBinding
+import com.streamability.login.ui.login_user.LoginFragmentDirections
+import com.streamability.streamingservices.ui.search.SearchFragment
+import com.streamability.streamingservices.ui.search.SearchFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,6 +48,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
+        viewModel.setFilledFormToFalse()
         //Set up text and showing of Forgot Password text view
         if (args.login == "signIn") {
             accountFragTitle.text = getString(R.string.sign_in)
@@ -143,6 +152,56 @@ class AccountFragment : Fragment() {
                     }
                 }
             }
+        }else{
+            viewModel.getDataStore()
+
+            viewModel.isSignUpBtnDisabled.observe(viewLifecycleOwner) { btnDisabled ->
+                when (btnDisabled) {
+                    true -> {
+                        binding.signInUpBtn.isEnabled = false
+                        binding.signInUpBtn.isClickable = false
+                    }
+                    false -> {
+                        binding.signInUpBtn.isEnabled = true
+                        binding.signInUpBtn.isClickable = true
+                    }
+                }
+            }
+
+            etUserText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun afterTextChanged(string: Editable?) {
+                    viewModel.username = string.toString()
+                    if (viewModel.username != "" && viewModel.username.isNotEmpty()){
+                        viewModel.isLoginUsernameFilled(true)
+                    }else{
+                        viewModel.isLoginUsernameFilled(false)
+                    }
+                    viewModel.isBtnDisabled()
+                }
+            })
+            etPasswordText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun afterTextChanged(string: Editable?) {
+                    viewModel.password = string.toString()
+                    if (viewModel.password != "" && viewModel.password.isNotEmpty()){
+                        viewModel.isLoginPasswordFilled(true)
+                    }else{
+                        viewModel.isLoginPasswordFilled(false)
+                    }
+                    viewModel.isBtnDisabled()
+                }
+            })
         }
         signInUpBtn.setOnClickListener {
             if (args.login == "signUp") {
@@ -151,18 +210,33 @@ class AccountFragment : Fragment() {
                     val username = binding.etUserText.text.toString()
                     val password = binding.etPasswordText.text.toString()
                     viewModel.setDataStore(username, password)
-
-                    // When Saved send to app
-                    //need to fix deep link. Best to separate app module over view from the app functionality
-//                    val pendingIntent = NavDeepLinkBuilder(requireContext())
-//                        .setGraph(com.streamability.alexisdaddi.R.navigation.app_nav_graph)
-//                        .setDestination(com.streamability.alexisdaddi.R.id.testFragment)
-//                        .createPendingIntent()
+                    viewModel.signInSuccess.observe(viewLifecycleOwner){ result ->
+                        if (result == true){
+                            findNavController().popBackStack()
+                            findNavController().popBackStack()
+                        }else if (result == false){
+                            //Sign In Error
+                            Snackbar.make(
+                                accountFragmentLayout,
+                                "An error occurred, please try again.",
+                                Snackbar.LENGTH_LONG
+                            ).setAction(R.string.retry) {
+                                viewModel.setDataStore(username, password)
+                            }.show()
+                        }
+                    }
+                }
+            }else{
+                if (viewModel.username != viewModel.loginUser && viewModel.password != viewModel.loginPass){
+                    Snackbar.make(
+                        accountFragmentLayout,
+                        "Username and Password do not match records, Try again",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -16,13 +16,12 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class DataPrefImpl(private val context: Context): DataPreference {
 
-    override suspend fun setPreference(username: String, password: String) {
+    override suspend fun setPreference(username: String, password: String): Boolean {
         val preferenceKey = stringPreferencesKey("username")
         val preferenceKey2 = stringPreferencesKey("password")
         context.dataStore.edit {it[preferenceKey] = username}
         context.dataStore.edit {it[preferenceKey2] = password}
-        collectPreference()
-        removeUser()
+        return true
     }
 
     override suspend fun collectPreference(): Flow<Login> {
@@ -31,7 +30,6 @@ class DataPrefImpl(private val context: Context): DataPreference {
             val password = preference[stringPreferencesKey("password")] ?: ""
             Login(username, password)
         }
-        Log.d("DataStoreCollect", "$dataFlow, ${dataFlow.first()}")
         return dataFlow
     }
 
