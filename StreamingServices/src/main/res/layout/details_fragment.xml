@@ -7,14 +7,29 @@
     android:background="@drawable/random_img_download"
     tools:context=".ui.details.DetailsFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/details_progress_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Watch Providers"
-        android:gravity="center"
-        android:textSize="30dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            android:id="@+id/details_include"
+            layout="@layout/watch_providers_details_design"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
