@@ -112,67 +112,6 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun toggleDarkMode() = with(binding) {
-        fun getMenuItem(menuItem: Int): MenuItem {
-            return options.navView.menu.findItem(menuItem)
-        }
-
-        val darkModeFlag = viewModel.darkMode.value!!
-
-//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-        if (darkModeFlag) {
-            // darkmode
-            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_light_mode_24)
-            getMenuItem(R.id.darkmode_item).title = "Light Mode"
-
-            searchFragmentViewContainer.background = activity?.let {
-                androidx.core.content.ContextCompat.getDrawable(it, R.drawable.dark_mode_img)
-            }
-
-            options.searchBar.background = activity?.let {
-                androidx.core.content.ContextCompat.getDrawable(it, R.drawable.rounded_gray)
-            }
-
-            options.appBarLayout.setBackgroundColor(
-                androidx.core.content.ContextCompat.getColor(
-                    requireContext(),
-                    R.color.dark_blue
-                )
-            )
-            options.topAppBar.setBackgroundColor(
-                androidx.core.content.ContextCompat.getColor(
-                    requireContext(),
-                    R.color.transparent
-                )
-            )
-        } else {
-            // lightmode
-            getMenuItem(R.id.darkmode_item).setIcon(R.drawable.ic_baseline_dark_mode_24)
-            getMenuItem(R.id.darkmode_item).title = "Dark Mode"
-
-            searchFragmentViewContainer.background = activity?.let {
-                androidx.core.content.ContextCompat.getDrawable(it, R.drawable.random_img_download)
-            }
-
-            options.searchBar.background = activity?.let {
-                androidx.core.content.ContextCompat.getDrawable(it, R.drawable.rounded_white)
-            }
-
-            options.appBarLayout.setBackgroundColor(
-                androidx.core.content.ContextCompat.getColor(
-                    requireContext(),
-                    R.color.blue
-                )
-            )
-            options.topAppBar.setBackgroundColor(
-                androidx.core.content.ContextCompat.getColor(
-                    requireContext(),
-                    R.color.blue
-                )
-            )
-        }
-    }
-
     private fun observeSearchState() = with(binding) {
         viewModel.searchMovieState.observe(viewLifecycleOwner) { searchMovie ->
             when (searchMovie) {
