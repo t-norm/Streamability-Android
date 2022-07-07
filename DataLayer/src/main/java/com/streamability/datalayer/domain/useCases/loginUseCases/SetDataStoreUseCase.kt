@@ -4,6 +4,6 @@ import com.streamability.datalayer.data.repo.Repository
 
 class SetDataStoreUseCase (private val repo: Repository) {
     suspend operator fun invoke(username: String, password: String): Boolean{
-        return repo.setDataStore(username, password)
+        return repo.setLoginDataStore(username, password)
     }
 }

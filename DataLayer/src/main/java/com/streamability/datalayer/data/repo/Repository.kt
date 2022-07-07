@@ -58,12 +58,20 @@ class Repository @Inject constructor(
         return validate.validateForm(inputForm, string)
     }
 
-    suspend fun setDataStore(username: String, password: String): Boolean {
-        return local.setPreference(username, password)
+    suspend fun setLoginDataStore(username: String, password: String): Boolean {
+        return local.setLoginPreference(username, password)
     }
-    suspend fun getDataStore(): Flow<Login> {
-        return local.collectPreference()
+    suspend fun getLoginDataStore(): Flow<Login> {
+        return local.collectLoginPreference()
     }
+
+    suspend fun setDarkModeDataStore(darkMode: Boolean): Boolean {
+        return local.setDarKModePreference(darkMode)
+    }
+    suspend fun getDarkModeLoginDataStore(): Flow<Boolean> {
+        return local.collectDarkModePreference()
+    }
+
     suspend fun deleteDataStore() {
         local.removeUser()
     }

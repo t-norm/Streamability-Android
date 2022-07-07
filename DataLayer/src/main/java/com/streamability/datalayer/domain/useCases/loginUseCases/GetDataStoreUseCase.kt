@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class GetDataStoreUseCase (private val repo: Repository) {
     suspend operator fun invoke(): Flow<Login> {
-        return repo.getDataStore()
+        return repo.getLoginDataStore()
     }
 }

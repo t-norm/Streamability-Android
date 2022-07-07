@@ -11,7 +11,10 @@ import com.streamability.datalayer.data.remote.RemoteDataSourceImpl
 import com.streamability.datalayer.data.repo.Repository
 import com.streamability.datalayer.domain.dataInterfaces.RemoteDataSource
 import com.streamability.datalayer.domain.useCases.AuthUseCase
+import com.streamability.datalayer.domain.useCases.DataStoreUseCases
 import com.streamability.datalayer.domain.useCases.MovieUseCases
+import com.streamability.datalayer.domain.useCases.dataStoreUseCase.GetDarkModeUseCase
+import com.streamability.datalayer.domain.useCases.dataStoreUseCase.SetDarkModeUseCase
 import com.streamability.datalayer.domain.useCases.loginUseCases.*
 import com.streamability.datalayer.domain.useCases.movieUseCases.MovieDetailsUseCase
 import com.streamability.datalayer.domain.useCases.movieUseCases.SearchMovieUseCase
@@ -82,6 +85,15 @@ object RepoModule {
             deleteDataStoreUseCase = DeleteDataStoreUseCase(repo),
             getDataStoreUseCase = GetDataStoreUseCase(repo),
             setDataStoreUseCase = SetDataStoreUseCase(repo)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun dataStoreUseCases(repo: Repository): DataStoreUseCases {
+        return DataStoreUseCases(
+            getDarkModeUseCase = GetDarkModeUseCase(repo),
+            setDarkModeUseCase = SetDarkModeUseCase(repo)
         )
     }
 }
