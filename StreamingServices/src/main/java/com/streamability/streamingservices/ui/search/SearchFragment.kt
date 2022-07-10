@@ -10,6 +10,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +20,11 @@ import com.streamability.streamingservices.R
 import com.streamability.streamingservices.databinding.FragmentSearchBinding
 import com.streamability.streamingservices.ui.search.adapter.SearchResultsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.coroutines.suspendCoroutine
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -131,6 +135,7 @@ class SearchFragment : Fragment() {
                     R.color.dark_blue
                 )
             )
+
             options.topAppBar.setBackgroundColor(
                 androidx.core.content.ContextCompat.getColor(
                     requireContext(),
@@ -156,6 +161,7 @@ class SearchFragment : Fragment() {
                     R.color.blue
                 )
             )
+
             options.topAppBar.setBackgroundColor(
                 androidx.core.content.ContextCompat.getColor(
                     requireContext(),
@@ -182,6 +188,18 @@ class SearchFragment : Fragment() {
                 }
                 is Resource.Loading -> {
                     searchProgressBar.visibility = View.VISIBLE
+
+                    lifecycleScope.launch {
+                        // number of milliseconds | 1,000 = 1 second
+                        val time = 10000
+                        delay(time.toLong())
+
+                        com.google.android.material.snackbar.Snackbar.make(
+                            searchProgressBar,
+                            "Your search is taking longer than expected. Check your network connection.",
+                            time
+                        ).show()
+                    }
                 }
                 is Resource.Error -> {
                     com.google.android.material.snackbar.Snackbar.make(
